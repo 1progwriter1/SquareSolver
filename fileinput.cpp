@@ -1,22 +1,29 @@
 #include <stdio.h>
 #include "fileinput.h"
+#include <assert.h>
+#include <errno.h>
 
-int FileInput(double *a, double *b, double *c) {
-    FILE *fp = fopen("text.txt", "r");
-    if (fp == NULL) {
-        printf("File not found\n");
+int FileInput(double *a, double *b, double *c, char *filename) {
+
+    assert(a != NULL);
+    assert(b != NULL);
+    assert(c != NULL);
+
+    errno = 0;
+    FILE *f = fopen(filename, "r");
+
+    if (f == NULL) {
+        perror("");
         return 0;
     }
-    if (fscanf(fp, "%lg %lg %lg", a, b, c) != 3 || getc(fp) != '\n') {
+    int status = 1;
+    if (fscanf(f, "%lg %lg %lg", a, b, c) != 3 || getc(f) != '\n') {
         printf("FileInput ERROR");
-        return 0;
+        status = 0;
     }
-    else {
-        return 1;
+
+    if (fclose(f) != 0) {
+        fprintf(stderr, "File not closed\n");
     }
-    int data[3] = {};
-    if (fclose(fp) != 0) {
-        printf("File not closed\n");
-        return 0;
-    }
+    return status;
 }

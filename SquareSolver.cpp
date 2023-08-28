@@ -24,23 +24,30 @@ int main(int argc, char *argv[]) {
     printf("# Square equation a[x2] + b[x] + c = 0 solver\n"
            "# (c) VLI, 2023\n\n");
 
-    if (argc > 1 && strcmp(argv[1], "test") == 0)
-        if (!TestAll())
-            return 0;
-
-    printf("\n");
-
-    printf("# Enter a, b, c: ");
-
-    double a = 0, b = 0, c = 0;
-    if (!GetRoots(&a, &b, &c))
+    int file = 0, test = 0, numfile = 0;
+    if (!GetArgs(argc, argv, &test, &file, &numfile))
         return 0;
 
-    /* if (!FileInput(&a, &b, &c))
-        return 0; */
+    if (test) {
+        if (!TestAll())
+            return 0;
+        printf("\n");
+    }
+
+    double a = 0, b = 0, c = 0;
+    if (file) {
+        if (!FileInput(&a, &b, &c, argv[numfile]))
+            return 0;
+    }
+    else {
+        printf("# Enter a, b, c: ");
+
+        if (!GetRoots(&a, &b, &c))
+            return 0;
+    }
 
     double x1 = 0, x2 = 0;
-    int nRoots = 0;
+    NumOfRoots nRoots = NOROOTS;
     nRoots = Solve(a, b, c, &x1, &x2);
     PrintRoots(nRoots, x1, x2);
 
