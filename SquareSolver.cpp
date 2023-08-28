@@ -3,6 +3,8 @@
 #include "input.h"
 #include "output.h"
 #include "tests.h"
+#include <string.h>
+#include "fileinput.h"
 
 /**
  * Solves a square equation ax2 + bx + c = 0
@@ -18,23 +20,29 @@
  * @note In case of infinite number of roots, returns SS_INF_ROOTS
  */
 
-int main() {
-    printf("# Square equation solver a[x2] + b[x] + c = 0\n"
+int main(int argc, char *argv[]) {
+    printf("# Square equation a[x2] + b[x] + c = 0 solver\n"
            "# (c) VLI, 2023\n\n");
 
-    if (!TestAll())
-        return 0;
-    else
-        printf("\n");
+    if (argc > 1 && strcmp(argv[1], "test") == 0)
+        if (!TestAll())
+            return 0;
+
+    printf("\n");
 
     printf("# Enter a, b, c: ");
 
     double a = 0, b = 0, c = 0;
-    GetRoots(&a, &b, &c);
+    if (!GetRoots(&a, &b, &c))
+        return 0;
+
+    /* if (!FileInput(&a, &b, &c))
+        return 0; */
 
     double x1 = 0, x2 = 0;
     int nRoots = 0;
     nRoots = Solve(a, b, c, &x1, &x2);
     PrintRoots(nRoots, x1, x2);
+
     return 0;
 }

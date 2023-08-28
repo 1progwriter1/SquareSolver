@@ -27,12 +27,7 @@ int Solve(double a, double b, double c, double *x1, double *x2) {
     assert(x2 != NULL);
     assert(x1 != x2);
 
-    if (IsEqual(a, zero)) {
-        return SolveLinear(b, c, x1);
-    }
-    else {
-        return SolveSquare(a, b, c, x1, x2);
-    }
+    return IsEqual(a, zero) ? SolveLinear(b, c, x1) : SolveSquare(a, b, c, x1, x2);
 }
 int SolveLinear(double b, double c, double *x1) {
 
@@ -83,6 +78,7 @@ int SolveSquare(double a, double b, double c, double *x1, double *x2) {
     assert(x1 != x2);
 
     double d = b * b - 4 * a * c;
+
     if (d < 0) {
         return NOROOTS;
     }
@@ -90,7 +86,8 @@ int SolveSquare(double a, double b, double c, double *x1, double *x2) {
         *x1 = IsEqual(b, zero) ? 0 : -b / (2 * a);
         return ONEROOT;
     }
-    *x1 = (-b + sqrt(d)) / (2 * a);
-    *x2 = (-b - sqrt(d)) / (2 * a);
+    double root = sqrt(d);
+    *x1 = (-b + root) / (2 * a);
+    *x2 = (-b - root) / (2 * a);
     return TWOROOTS;
 }

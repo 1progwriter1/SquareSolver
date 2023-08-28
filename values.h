@@ -1,3 +1,12 @@
+#ifndef values_h
+#define values_h
+
+struct TestData {
+    double a, b, c;
+    double x1ref, x2ref;
+    int nRootsref;
+};
+
 enum NumOfRoots {
     NOROOTS,
     ONEROOT,
@@ -5,10 +14,6 @@ enum NumOfRoots {
     INFROOTS
 };
 
-const int zero = 0;
+const int zero = 0; //Genious!
 
-struct TestData {
-    double a, b, c;
-    double x1ref, x2ref;
-    int nRootsref;
-};
+#endif

@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <assert.h>
 #include "input.h"
+#include "values.h"
+#include "compare.h"
 
-void GetRoots(double *a, double *b, double *c) {
+int GetRoots(double *a, double *b, double *c) {
 
     /**
      * Gets roots from user
@@ -18,15 +20,23 @@ void GetRoots(double *a, double *b, double *c) {
 
     int correct = 0;
     do {
+    int col = 0;
         correct = 0;
-        if (scanf("%lg %lg %lg", a, b, c) != 3 || getchar() != '\n') {
+        if ((col = scanf("%lg %lg %lg", a, b, c)) != 3 || getchar() != '\n') {
             correct = 1;
-            printf("Input ERROR. Try again: ");
-            clear();
+            if (col != -1) {
+                printf("Input ERROR. Try again: ");
+                clear();
+            }
+            else {
+                printf("\nEnd of input");
+                return 0;
+            }
         }
     } while (correct);
+    return 1;
 }
 
 void clear() {
-    while (getchar() != '\n') ;
+    while (getchar() != '\n');
 }
