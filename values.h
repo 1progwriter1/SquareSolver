@@ -1,5 +1,9 @@
-#ifndef values_h
-#define values_h
+#ifndef __values__
+#define __values__
+
+struct MainArgs {
+    int test, file, numfile;
+};
 
 struct TestData {
     double a, b, c;
@@ -15,5 +19,11 @@ enum NumOfRoots {
 };
 
 const int zero = 0; //Genious!
+
+const int success = 0;
+const int GetRoots_error = 1;
+const int FileInput_error = 2;
+const int tests_error = 3;
+const int MainArgs_error = 4;
 
 #endif

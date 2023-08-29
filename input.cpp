@@ -35,23 +35,23 @@ void clear() {
         ;
 }
 
-int GetArgs(int argc, char *argv[], int *test, int *file, int *numfile) {
+int GetArgs(int argc, char *argv[], struct MainArgs *maindata) {
 
-    assert(test != NULL);
-    assert(file != NULL);
-    assert(numfile != NULL);
+    maindata->test = 0;
+    maindata->file = 0;
+    maindata->numfile = 0;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--test") == 0)
-            *test = 1;
+            maindata->test = 1;
         else if (strcmp(argv[i], "--file") == 0) {
             if (++i == argc) {
-                printf("File name expected");
+                printf("File name expected\n");
                 return 0;
             }
             else {
-                *numfile = i;
-                *file = 1;
+                maindata->numfile = i;
+                maindata->file = 1;
             }
         }
         else printf("Invalid argument %s\n", argv[i]);

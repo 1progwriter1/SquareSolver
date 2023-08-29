@@ -1,5 +1,5 @@
-#ifndef tests_h
-#define tests_h
+#ifndef __tests__
+#define __tests__
 #include "values.h"
 
 int TestAll();

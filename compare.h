@@ -1,5 +1,5 @@
-#ifndef compare_h
-#define compare_h
+#ifndef __compare__
+#define __compare__
 
 int IsEqual(double a, double b);
 

@@ -1,5 +1,5 @@
-#ifndef input_h
-#define input_h
+#ifndef SQSOLVER_INPUT_H
+#define __input__
 
 /**
  * Gets roots from user
@@ -11,7 +11,7 @@
  */
 
 int GetRoots(double *a, double *b, double *c);
-int GetArgs(int argc, char *argv[], int *test, int *file, int *numfile);
+int GetArgs(int argc, char *argv[], struct MainArgs *maindata);
 void clear();
 
 #endif

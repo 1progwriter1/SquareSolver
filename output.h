@@ -1,5 +1,5 @@
-#ifndef output_h
-#define output_h
+#ifndef __output__
+#define __output__
 #include "values.h"
 
 /**
